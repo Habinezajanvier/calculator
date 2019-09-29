@@ -11,18 +11,20 @@ let deleteNumber = document.getElementById('delete');
 let displayedValue = 0;
 let evalStringArray = [];
 let firstValue;
+let lastValue;
 
 let addNumber = (clicked) => {
     let text = clicked.target.innerText;
     let ope = value.innerText;
 
-    if(displayedValue === 0 || ope == "+" || ope == "-" || ope == "/" || ope == "x"){
+    if(displayedValue == '0' || ope == "+" || ope == "-" || ope == "/" || ope == "x" ){
         displayedValue = "";
     }
-
     displayedValue += text;
     value.innerText = displayedValue;
 }
+
+let operate ;
 
 let performOperation = (clicked) => {
     let operation = clicked.target.innerText;
@@ -30,45 +32,53 @@ let performOperation = (clicked) => {
     switch (operation) {
         case '+':
             firstValue = displayedValue;
-            displayedValue = operation + " ";
+            operate = operation + " ";
+            displayedValue = operate;
             value.innerText = displayedValue;
             evalStringArray.push(firstValue);
             evalStringArray.push("+");
             break;
         case '-':
             firstValue = displayedValue;
-            displayedValue = operation + "";
+            operate = operation + " ";
+            displayedValue = operate;
             value.innerText = displayedValue;
             evalStringArray.push(firstValue);
             evalStringArray.push("-");
             break;
         case 'x':
             firstValue = displayedValue;
-            displayedValue = operation + "";
+            operate = operation + " ";
+            displayedValue = operate;
             value.innerText = displayedValue;
             evalStringArray.push(firstValue);
             evalStringArray.push("*");
             break;
         case '/':
             firstValue= displayedValue;
-            displayedValue = operation + "";
+            operate = operation + " ";
+            displayedValue = operate;
             value.innerText = displayedValue;
             evalStringArray.push(firstValue);
             evalStringArray.push(" /");
             break;
         case '=':
-            evalStringArray.push(displayedValue);
-            let final = eval(evalStringArray.join(" "));
-            let finalDisplay = final + "";
-            evalStringArray = [];
-
-            let upperValue = firstValue + '\n' + '+' + displayedValue+ '\n';
-            displayedValue =  upperValue + '=' + finalDisplay;
-
+            lastValue = displayedValue;
+            if(lastValue == "" || lastValue == operate || operate == undefined){
+                value.innerText = "Error";
+                //evalStringArray = [];
+                displayedValue = 0;
+            }
+            else{
+                evalStringArray.push(lastValue);
             
-
-            value.innerText = displayedValue;
-            displayedValue = final + "";
+                let final = eval(evalStringArray.join(" "));
+                displayedValue = final + "";
+                
+                let finals = firstValue + '\n' + operate + lastValue + '\n' + displayedValue;
+                value.innerText = finals;
+            }
+            evalStringArray = [];
             break;
         default:
             
@@ -86,9 +96,14 @@ for (let i=0; i<operators.length; i ++){
 
 deleteNumber.onclick = () => {
     let lov = displayedValue.length;
-    displayedValue = displayedValue.slice(0, lov-1);
-    if (displayedValue === ''){
+    if(displayedValue == 0){
         displayedValue = 0;
+    }
+    else{
+        displayedValue = displayedValue.slice(0, lov-1);
+        if (displayedValue === ''){
+            displayedValue = 0;
+        }
     }
     value.innerText = displayedValue;
 };
