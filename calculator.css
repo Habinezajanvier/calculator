@@ -1,0 +1,58 @@
+.calc{
+    margin: 100px 30% ;
+}
+
+.row{
+    display: table;
+    width: 210px;
+    table-layout: fixed;
+}
+
+.btn{
+    background-color: aliceblue;
+    color: black;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid rgb(75, 9, 9);
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 100;
+    padding: 1px;
+}
+.btn:hover{
+    background-color: brown;
+    color: white;
+    font-weight: bold;
+}
+
+.column{
+    display: table-cell;
+    
+}
+
+#screen{
+    width: 210px;
+    height: 150px;
+    background-color: black;
+    color: white;
+    border: solid 1px rgb(10, 238, 151);
+    border-radius: 5px;
+    text-align: right;
+    font-size: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#clear, #equal{
+    width: 55px;
+    background-color: aqua;
+}
+#delete{
+    background-color: rgb(243, 92, 92);
+}
+
+.operator{
+    background-color: olivedrab;
+}
